@@ -13,6 +13,7 @@ app.use(bodyParser.json());
 
 mongoose.Promise = global.Promise;
 
+// get
 
 app.get('/log', (req, res) => {
   RunLog
