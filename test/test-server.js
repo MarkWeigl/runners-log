@@ -18,23 +18,6 @@ describe('RunLog', function() {
     return closeServer();
   });
 
-  it('should list items on GET', function() {
-   
-    return chai.request(app)
-      .get('/log')
-      .then(function(res) {
-        res.should.have.status(200);
-        res.should.be.json;
-        res.body.should.be.a('array');
-        res.body.length.should.be.at.least(1);
-        const expectedKeys = ['id', 'date', 'time', 'distance', 'location', 'weather', 'mood'];
-        res.body.forEach(function(item) {
-          item.should.be.a('object');
-          item.should.include.keys(expectedKeys);
-        });
-      });
-  });
-
   it('should add an item on POST', function() {
     const newItem = {
       date: '03/25/17', 
@@ -55,6 +38,23 @@ describe('RunLog', function() {
         res.body.should.include.keys('id', 'date', 'time', 'distance', 'location', 'weather', 'mood');
         res.body.id.should.not.be.null;
         res.body.should.deep.equal(Object.assign(newItem, {id: res.body.id, date: res.body.date}));
+      });
+  });
+
+  it('should list items on GET', function() {
+   
+    return chai.request(app)
+      .get('/log')
+      .then(function(res) {
+        res.should.have.status(200);
+        res.should.be.json;
+        res.body.should.be.a('array');
+        res.body.length.should.be.at.least(1);
+        const expectedKeys = ['id', 'date', 'time', 'distance', 'location', 'weather', 'mood'];
+        res.body.forEach(function(item) {
+          item.should.be.a('object');
+          item.should.include.keys(expectedKeys);
+        });
       });
   });
 
