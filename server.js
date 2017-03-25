@@ -82,7 +82,7 @@ app.put('/log/:id', (req, res) => {
   RunLog
     .findByIdAndUpdate(req.params.id, {$set: updated}, {new: true})
     .exec()
-    .then(updatedPost => res.status(201).json(updatedPost.apiRepr()))
+    .then(updatedPost => res.status(200).json(updatedPost.apiRepr()))
     .catch(err => res.status(500).json({message: 'Unable to update'}));
 });
 

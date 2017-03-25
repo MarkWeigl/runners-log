@@ -18,7 +18,7 @@ describe('RunLog', function() {
     return closeServer();
   });
 
-    it('should list items on GET', function() {
+  it('should list items on GET', function() {
    
     return chai.request(app)
       .get('/log')
@@ -35,8 +35,16 @@ describe('RunLog', function() {
       });
   });
 
-    it('should add an item on POST', function() {
-    const newItem = {date: '03/24/17', checked: false};
+  it('should add an item on POST', function() {
+    const newItem = {
+      date: '03/25/17', 
+      time: '45 mins',
+      distance: '4 miles',
+      location: 'open space',
+      weather: 'cloudy',
+      mood: 'tired'
+    };
+
     return chai.request(app)
       .post('/log')
       .send(newItem)
@@ -46,13 +54,12 @@ describe('RunLog', function() {
         res.body.should.be.a('object');
         res.body.should.include.keys('id', 'date', 'time', 'distance', 'location', 'weather', 'mood');
         res.body.id.should.not.be.null;
-        res.body.should.deep.equal(Object.assign(newItem, {id: res.body.id}));
+        res.body.should.deep.equal(Object.assign(newItem, {id: res.body.id, date: res.body.date}));
       });
   });
 
-     it('should update items on PUT', function() {
-      const updateData = {
-      date: '03/24/17',
+  it('should update items on PUT', function() {
+    const updateData = {
       time: '30 mins',
       distance: '3 miles',
       location: 'south platte river',
@@ -64,11 +71,12 @@ describe('RunLog', function() {
       .get('/log')
       .then(function(res) {
         updateData.id = res.body[0].id;
+        updateData.date = res.body[0].date;
         return chai.request(app)
           .put(`/log/${updateData.id}`)
           .send(updateData);
       })
-        .then(function(res) {
+      .then(function(res) {
         res.should.have.status(200);
         res.should.be.json;
         res.body.should.be.a('object');
