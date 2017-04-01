@@ -9,6 +9,7 @@
   crossorigin="anonymous"></script>
   <script type="text/javascript" src="js/app.js"></script>
   <link rel="stylesheet" type="text/css" href="style/style.css">
+  <script src="https://use.fontawesome.com/88f70c391b.js"></script>
 </head>
 <body>
   <div id="splashpage">
@@ -16,6 +17,7 @@
     <button id="start">Start</button>
   </div>
   <form id="login">
+    <h1>Runner's Log</h1>
     <p>Username</p>
     <input type="text" id="username">
     <p>Password</p>
@@ -23,5 +25,44 @@
     <button type="submit">Login</button>
     <button type="submit">Create Account</button>
   </form>
- </body>
+  <div id="viewruns">
+      <button id="addrun">Add Run</button>
+  </div>
+  <form id="addruns">
+     <p>Date of Run</p>
+    <input tye="text" id="dateofrun">
+     <p>Time of Run<p/p>
+    <input type="text" id="timeofrun">
+     <p>Distance of Run</p>
+    <input type="text" id="distanceofrun">
+     <p>Location of Run</p>
+    <input type="text" id="locationofrun">
+    <label>Weather</label>
+             <select id = "weatherrun">
+               <option value = "1">Sunny</option>
+               <option value = "2">Cloudy</option>
+               <option value = "3">Partly Cloudy</option>
+               <option value = "4">Rain</option>
+               <option value = "1">Snow</option>
+               <option value = "2">Ice</option>
+               <option value = "3">Windy</option>
+               <option value = "4">Hot</option>
+               <option value = "4">Cold</option>
+             </select>
+    <label>Mood</label>
+             <select id = "moodrun">
+               <option value = "1">Energetic</option>
+               <option value = "2">Tired</option>
+               <option value = "3">Happy</option>
+               <option value = "4">Sad</option>
+              </select>
+          <p>Notes</p>
+          <textarea id="notesrun" rows="6" cols="60"> 
+          </textarea>
+    <button type="submit">Submit Run</button>
+  </form>
+  <div id="rundetails">
+
+  </div>
+  </body>
 </html>

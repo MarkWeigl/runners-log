@@ -6,7 +6,8 @@ const RunLogSchema = mongoose.Schema({
   distance: {type: String, required: true},
   location: {type: String, required: true},
   weather: {type: String, required: true},
-  mood: {type: String, required: true}
+  mood: {type: String, required: true},
+  notes: {type: String, required: false}
 });
 
 RunLogSchema.methods.apiRepr = function() {
@@ -18,6 +19,7 @@ RunLogSchema.methods.apiRepr = function() {
     location: this.location,
     weather: this.weather,
     mood: this.mood
+    notes: this.notes
   };
 }
 
