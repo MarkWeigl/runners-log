@@ -8,7 +8,7 @@ $(document).ready(function(){
   };
   $('#login').hide();
   //$('#viewruns').hide();
-  $('#addruns').hide();
+  $('#addruns');
   //$('#rundetails').hide();
 
   //$('#rundetails').hide();
@@ -24,19 +24,43 @@ $(document).ready(function(){
       html += `<tr data-id="${data.RunLog[i].id}"><td>${data.RunLog[i].date}</td>
         <td>${data.RunLog[i].time}</td>
         <td>${data.RunLog[i].distance}</td>
-        <td><i class="fa fa-pencil"></i>
+        <td><i class="fa fa-pencil edit"></i>
         <i class="fa fa-times delete"></i>
-        <i class="fa fa-info"></i></td></tr>`;
+        <i class="fa fa-info details"></i></td></tr>`;
     }
     html += `</tbody></table>`
-    $('#viewruns').append(html);
+    $('#viewruns').html(html);
   }
   displayRuns(data);
 
+  $(document).on("click",".details",function(){
+    var id = $(this).parent().parent().attr("data-id");
+    displayDetails(data, id);
+  });
+
   $(document).on("click",".delete",function(){
     var id = $(this).parent().parent().attr("data-id");
-      displayDetails(data, id);
+    deleteRun(data, id);
   });
+
+  $(document).on("click",".edit",function(){
+    var id = $(this).parent().parent().attr("data-id");
+    editRuns(data, id);
+  });
+
+  $('#addruns').submit(function(e){
+    e.preventDefault();
+    var runObj= {};
+    runObj.date=$("#dateofrun").val();
+    runObj.time=$("#timeofrun").val();
+    runObj.distance=$("#distanceofrun").val();
+    runObj.location=$("#locationofrun").val();
+    runObj.weather=$("#weatherrun").val();
+    runObj.mood=$("#moodrun").val();
+    runObj.notes=$("#notesrun").val();
+
+    console.log (runObj);
+  })
 
   function displayDetails(data, id){
     var html = `<table><thead><tr><th>Date</th><th>Time</th><th>Distance</th><th>Location</th>
@@ -52,6 +76,18 @@ $(document).ready(function(){
        
     html += `</tbody></table>`;
     $('#rundetails').html(html);
+  }
+
+  function deleteRun(data, id){
+    data.RunLog.splice(id,1);
+    displayRuns(data);
+  }
+
+  function addRun(data,id){
+
+  }
+  function editRuns(data, id){
+    
   }
 
 });
