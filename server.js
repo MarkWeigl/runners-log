@@ -8,6 +8,7 @@ const {RunLog} = require('./models');
 
 const app = express();
 
+app.use(express.static('public'));
 app.use(morgan('common'));
 app.use(bodyParser.json());
 
@@ -44,7 +45,8 @@ app.post('/log', (req, res) => {
       distance: req.body.distance,
       location: req.body.location,
       weather: req.body.weather,
-      mood: req.body.mood
+      mood: req.body.mood,
+      notes: req.body.notes
     })
     .then(RunLog => res.status(201).json(RunLog.apiRepr()))
     .catch(err => {

@@ -18,12 +18,18 @@ $(document).ready(function(){
       $('#login').show();
     });
 
+  function getRuns(){
+    $.getJSON("/log",function(data){
+      displayRuns(data);
+    })
+  }
+
   function displayRuns(data){
     var html = `<table><thead><tr><th>Date</th><th>Time</th><th>Distance</th><th>Actions</th></tr></thead><tbody>`
-    for (var i=0; i < data.RunLog.length; i++) {
-      html += `<tr data-id="${data.RunLog[i].id}"><td>${data.RunLog[i].date}</td>
-        <td>${data.RunLog[i].time}</td>
-        <td>${data.RunLog[i].distance}</td>
+    for (var i=0; i < data.length; i++) {
+      html += `<tr data-id="${data[i].id}"><td>${data[i].date.slice(0,10)}</td>
+        <td>${data[i].time}</td>
+        <td>${data[i].distance}</td>
         <td><i class="fa fa-pencil edit"></i>
         <i class="fa fa-times delete"></i>
         <i class="fa fa-info details"></i></td></tr>`;
@@ -31,7 +37,7 @@ $(document).ready(function(){
     html += `</tbody></table>`
     $('#viewruns').html(html);
   }
-  displayRuns(data);
+  getRuns();
 
   $(document).on("click",".details",function(){
     var id = $(this).parent().parent().attr("data-id");
@@ -58,9 +64,27 @@ $(document).ready(function(){
     runObj.weather=$("#weatherrun").val();
     runObj.mood=$("#moodrun").val();
     runObj.notes=$("#notesrun").val();
-
-    console.log (runObj);
+    
+    $.ajax({
+      url: "/log",
+      method: "POST",
+      data: JSON.stringify(runObj),
+      contentType: "application/json",
+      dataType: "json",
+      success: function(data) {
+        getRuns();
+        console.log(data);
+      },
+      error: function(err) {
+        console.log(err);
+      }
+    })
   })
+
+  function editRuns(data, id){
+    displayDetails(data);
+
+  }
 
   function displayDetails(data, id){
     var html = `<table><thead><tr><th>Date</th><th>Time</th><th>Distance</th><th>Location</th>
@@ -79,15 +103,19 @@ $(document).ready(function(){
   }
 
   function deleteRun(data, id){
-    data.RunLog.splice(id,1);
-    displayRuns(data);
+    $.ajax({
+      url: "/log/"+id,
+      method: "DELETE",
+      contentType: "application/json",
+      dataType: "json",
+      success: function(data) {
+        console.log(data);
+      },
+      error: function(err) {
+        console.log(err);
+      }
+    })
+    getRuns();
   }
 
-  function addRun(data,id){
-
-  }
-  function editRuns(data, id){
-    
-  }
-
-});
+ });

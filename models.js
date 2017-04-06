@@ -18,7 +18,7 @@ RunLogSchema.methods.apiRepr = function() {
     distance: this.distance,
     location: this.location,
     weather: this.weather,
-    mood: this.mood
+    mood: this.mood,
     notes: this.notes
   };
 }
