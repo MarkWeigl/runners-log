@@ -63,8 +63,39 @@
   </form>
   <div id="rundetails">
   </div>
-  <div id="editruns">
-  </div>
+  <form id="editruns">
+  <p>Date of Run</p>
+    <input type="text" id="dateofrun">
+     <p>Time of Run<p/p>
+    <input type="text" id="timeofrun">
+     <p>Distance of Run</p>
+    <input type="text" id="distanceofrun">
+     <p>Location of Run</p>
+    <input type="text" id="locationofrun">
+    <label>Weather</label>
+             <select id = "weatherrun">
+               <option value = "Sunny">Sunny</option>
+               <option value = "Cloudy">Cloudy</option>
+               <option value = "Partly Cloudy">Partly Cloudy</option>
+               <option value = "Rain">Rain</option>
+               <option value = "Snow">Snow</option>
+               <option value = "Ice">Ice</option>
+               <option value = "Windy">Windy</option>
+               <option value = "Hot">Hot</option>
+               <option value = "Cold">Cold</option>
+             </select>
+    <label>Mood</label>
+             <select id = "moodrun">
+               <option value = "Energetic">Energetic</option>
+               <option value = "Tired">Tired</option>
+               <option value = "Happy">Happy</option>
+               <option value = "Sad">Sad</option>
+              </select>
+          <p>Notes</p>
+          <textarea id="notesrun" rows="6" cols="60"> 
+          </textarea>
+    <button type="submit">Submit Run</button>
+  </form>
   <div id="deleterun">
   </div>
   </body>

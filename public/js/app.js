@@ -1,16 +1,14 @@
 $(document).ready(function(){
-  var data={
-    RunLog:[{"id": "0", "date": "03/20/17", "time": "30 minutes", "distance": "3 miles", "location": "city park", "weather": "sunny", "mood": "grumpy", "notes": "ran with new shoes"},
-    {"id": "1", "date": "03/21/17", "time": "45 minutes", "distance": "5 miles", "location": "sloans lake", "weather": "rainy", "mood": "happy"},
-    {"id": "2", "date": "03/22/17", "time": "20 minutes", "distance": "2 miles", "location": "neighborhood", "weather": "snowy", "mood": "cold", "notes": "snowy run.  had to end early"},
-    {"id": "3", "date": "03/23/17", "time": "45 minutes", "distance": "6 miles", "location": "mountains", "weather": "sunny", "mood": "happy"},
-    {"id": "4", "date": "03/24/17", "time": "30 minutes", "distance": "3 miles", "location": "rains park", "weather": "cloudy", "mood": "tired", "notes": "tired so stopped running"}]
-  };
+// var data={
+//    RunLog:[{"id": "0", "date": "03/20/17", "time": "30 minutes", "distance": "3 miles", "location": "city park", "weather": "sunny", "mood": "grumpy", "notes": "ran with new shoes"},
+//    {"id": "1", "date": "03/21/17", "time": "45 minutes", "distance": "5 miles", "location": "sloans lake", "weather": "rainy", "mood": "happy"},
+//    {"id": "2", "date": "03/22/17", "time": "20 minutes", "distance": "2 miles", "location": "neighborhood", "weather": "snowy", "mood": "cold", "notes": "snowy run.  had to end early"},
+//    {"id": "3", "date": "03/23/17", "time": "45 minutes", "distance": "6 miles", "location": "mountains", "weather": "sunny", "mood": "happy"},
+//    {"id": "4", "date": "03/24/17", "time": "30 minutes", "distance": "3 miles", "location": "rains park", "weather": "cloudy", "mood": "tired", "notes": "tired so stopped running"}]
+//  };
   $('#login').hide();
   //$('#viewruns').hide();
   $('#addruns');
-  //$('#rundetails').hide();
-
   //$('#rundetails').hide();
 
   $('#start').mousedown(function() {
@@ -78,25 +76,39 @@ $(document).ready(function(){
       error: function(err) {
         console.log(err);
       }
-    })
-  })
+    });
+  });
 
-  function editRuns(data, id){
-    displayDetails(data);
-
-  }
+ $('#editruns').submit(function(e){
+    e.preventDefault();
+    displayDetails(data, id)
+ $.ajax({
+      url: "/log",
+      method: "PUT",
+      data: JSON.stringify(runObj),
+      contentType: "application/json",
+      dataType: "json",
+      success: function(data) {
+        getRuns();
+        console.log(data);
+      },
+      error: function(err) {
+        console.log(err);
+      }
+    });
+  });
 
   function displayDetails(data, id){
     var html = `<table><thead><tr><th>Date</th><th>Time</th><th>Distance</th><th>Location</th>
                 <th>Weather</th><th>Mood</th><th>Notes</th></tr></thead><tbody>`
     
-      html += `<tr data-id="${data.RunLog[id].id}"><td>${data.RunLog[id].date}</td>
-        <td>${data.RunLog[id].time}</td>
-        <td>${data.RunLog[id].distance}</td>
-        <td>${data.RunLog[id].location}</td>
-        <td>${data.RunLog[id].weather}</td>
-        <td>${data.RunLog[id].mood}</td>
-        <td>${data.RunLog[id].notes}</td>`;
+      html += `<tr data-id="${data.RunLog[id].id}"><td>${data[id].date}</td>
+        <td>${data[id].time}</td>
+        <td>${data[id].distance}</td>
+        <td>${data[id].location}</td>
+        <td>${data[id].weather}</td>
+        <td>${data[id].mood}</td>
+        <td>${data[id].notes}</td>`;
        
     html += `</tbody></table>`;
     $('#rundetails').html(html);
