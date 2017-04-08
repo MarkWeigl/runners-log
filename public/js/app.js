@@ -44,7 +44,7 @@ $(document).ready(function(){
 
   $(document).on("click",".delete",function(){
     var id = $(this).parent().parent().attr("data-id");
-    deleteRun(data, id);
+    deleteRun(id);
   });
 
   $(document).on("click",".edit",function(){
@@ -81,8 +81,8 @@ $(document).ready(function(){
 
  $('#editruns').submit(function(e){
     e.preventDefault();
-    displayDetails(data, id)
- $.ajax({
+    displayDetails(data, id);
+    $.ajax({
       url: "/log",
       method: "PUT",
       data: JSON.stringify(runObj),
@@ -114,7 +114,7 @@ $(document).ready(function(){
     $('#rundetails').html(html);
   }
 
-  function deleteRun(data, id){
+  function deleteRun(id){
     $.ajax({
       url: "/log/"+id,
       method: "DELETE",
