@@ -1,5 +1,5 @@
 $(document).ready(function(){
-// var data={
+  var data;
 //    RunLog:[{"id": "0", "date": "03/20/17", "time": "30 minutes", "distance": "3 miles", "location": "city park", "weather": "sunny", "mood": "grumpy", "notes": "ran with new shoes"},
 //    {"id": "1", "date": "03/21/17", "time": "45 minutes", "distance": "5 miles", "location": "sloans lake", "weather": "rainy", "mood": "happy"},
 //    {"id": "2", "date": "03/22/17", "time": "20 minutes", "distance": "2 miles", "location": "neighborhood", "weather": "snowy", "mood": "cold", "notes": "snowy run.  had to end early"},
@@ -17,9 +17,10 @@ $(document).ready(function(){
     });
 
   function getRuns(){
-    $.getJSON("/log",function(data){
-      displayRuns(data);
-    })
+    $.getJSON("/log",function(results){
+      data = results;
+      displayRuns(results);
+    });
   }
 
   function displayRuns(data){
@@ -32,14 +33,17 @@ $(document).ready(function(){
         <i class="fa fa-times delete"></i>
         <i class="fa fa-info details"></i></td></tr>`;
     }
-    html += `</tbody></table>`
+    html += `</tbody></table>`;
     $('#viewruns').html(html);
   }
   getRuns();
 
   $(document).on("click",".details",function(){
     var id = $(this).parent().parent().attr("data-id");
-    displayDetails(data, id);
+    var record = data.filter(function(element){
+      return element.id == id;
+    });
+    displayDetails(record[0], id);
   });
 
   $(document).on("click",".delete",function(){
@@ -49,7 +53,18 @@ $(document).ready(function(){
 
   $(document).on("click",".edit",function(){
     var id = $(this).parent().parent().attr("data-id");
-    editRuns(data, id);
+    var record = data.filter(function(element){
+      return element.id == id;
+    });
+    $("#dateofrun").val(record[0].date);
+    $("#timeofrun").val(record[0].time);
+    $("#distanceofrun").val(record[0].distance);
+    $("#locationofrun").val(record[0].location);
+    $("#weatherrun").val(record[0].weather);
+    $("#moodrun").val(record[0].mood);
+    $("#notesrun").val(record[0].notes);
+    
+    // editRuns(record[0], id);
   });
 
   $('#addruns').submit(function(e){
@@ -102,13 +117,13 @@ $(document).ready(function(){
     var html = `<table><thead><tr><th>Date</th><th>Time</th><th>Distance</th><th>Location</th>
                 <th>Weather</th><th>Mood</th><th>Notes</th></tr></thead><tbody>`
     
-      html += `<tr data-id="${data.RunLog[id].id}"><td>${data[id].date}</td>
-        <td>${data[id].time}</td>
-        <td>${data[id].distance}</td>
-        <td>${data[id].location}</td>
-        <td>${data[id].weather}</td>
-        <td>${data[id].mood}</td>
-        <td>${data[id].notes}</td>`;
+      html += `<tr data-id="${data.id}"><td>${data.date.slice(0,10)}</td>
+        <td>${data.time}</td>
+        <td>${data.distance}</td>
+        <td>${data.location}</td>
+        <td>${data.weather}</td>
+        <td>${data.mood}</td>
+        <td>${data.notes}</td>`;
        
     html += `</tbody></table>`;
     $('#rundetails').html(html);
