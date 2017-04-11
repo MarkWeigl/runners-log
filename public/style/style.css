@@ -4,12 +4,17 @@ body {
   background-position: top center;
 }
 
-viewruns  {
+#splashpage {
+  text-align: center;
+}
+#addruns {
   text-align: center;
 }
 
-editruns {
-  text-align: center;
+.submitruns {
+  display: block;
 }
- 
 
+#recordid {
+  display: none;
+}

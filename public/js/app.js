@@ -8,12 +8,13 @@ $(document).ready(function(){
 //  };
   $('#login').hide();
   //$('#viewruns').hide();
-  $('#addruns');
-  //$('#rundetails').hide();
+  $('#addruns').hide();
+  $('#rundetails').hide();
 
   $('#start').mousedown(function() {
       $('#splashpage').hide();
-      $('#login').show();
+    //  $('#login').show();
+      $('#viewruns').show();
     });
 
   function getRuns(){
@@ -56,16 +57,20 @@ $(document).ready(function(){
     var record = data.filter(function(element){
       return element.id == id;
     });
-    $("#dateofrun").val(record[0].date);
-    $("#timeofrun").val(record[0].time);
-    $("#distanceofrun").val(record[0].distance);
-    $("#locationofrun").val(record[0].location);
-    $("#weatherrun").val(record[0].weather);
-    $("#moodrun").val(record[0].mood);
-    $("#notesrun").val(record[0].notes);
-    
+    $("#recordid").val(id);
+    $("#dateofrunx").val(record[0].date.slice(0,10));
+    $("#timeofrunx").val(record[0].time);
+    $("#distanceofrunx").val(record[0].distance);
+    $("#locationofrunx").val(record[0].location);
+    $("#weatherrunx").val(record[0].weather);
+    $("#moodrunx").val(record[0].mood);
+    $("#notesrunx").val(record[0].notes);
+    $('#editruns').show();
+    $('#viewruns').hide();
+  
     // editRuns(record[0], id);
   });
+
 
   $('#addruns').submit(function(e){
     e.preventDefault();
@@ -96,9 +101,17 @@ $(document).ready(function(){
 
  $('#editruns').submit(function(e){
     e.preventDefault();
-    displayDetails(data, id);
+    var runObj= {};
+    runObj.id=$("#recordid").val();
+    runObj.date=$("#dateofrunx").val();
+    runObj.time=$("#timeofrunx").val();
+    runObj.distance=$("#distanceofrunx").val();
+    runObj.location=$("#locationofrunx").val();
+    runObj.weather=$("#weatherrunx").val();
+    runObj.mood=$("#moodrunx").val();
+    runObj.notes=$("#notesrunx").val();
     $.ajax({
-      url: "/log",
+      url: "/log/"+runObj.id,
       method: "PUT",
       data: JSON.stringify(runObj),
       contentType: "application/json",
