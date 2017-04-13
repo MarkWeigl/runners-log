@@ -7,7 +7,8 @@ $(document).ready(function(){
 //    {"id": "4", "date": "03/24/17", "time": "30 minutes", "distance": "3 miles", "location": "rains park", "weather": "cloudy", "mood": "tired", "notes": "tired so stopped running"}]
 //  };
   $('#login').hide();
-  //$('#viewruns').hide();
+  $('#editruns').hide();
+  $('#viewruns').hide();
   $('#addruns').hide();
   $('#rundetails').hide();
 
@@ -110,6 +111,8 @@ $(document).ready(function(){
     runObj.weather=$("#weatherrunx").val();
     runObj.mood=$("#moodrunx").val();
     runObj.notes=$("#notesrunx").val();
+    $('#editruns').hide();
+    $('#viewruns').show();
     $.ajax({
       url: "/log/"+runObj.id,
       method: "PUT",
@@ -127,7 +130,7 @@ $(document).ready(function(){
   });
 
   function displayDetails(data, id){
-    var html = `<table><thead><tr><th>Date</th><th>Time</th><th>Distance</th><th>Location</th>
+    var html = `<table align="center"><thead><tr><th>Date</th><th>Time</th><th>Distance</th><th>Location</th>
                 <th>Weather</th><th>Mood</th><th>Notes</th></tr></thead><tbody>`
     
       html += `<tr data-id="${data.id}"><td>${data.date.slice(0,10)}</td>

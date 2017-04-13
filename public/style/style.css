@@ -4,10 +4,7 @@ body {
   background-position: top center;
 }
 
-#splashpage {
-  text-align: center;
-}
-#addruns {
+#splashpage, #addruns, #editruns {
   text-align: center;
 }
 
