@@ -142,7 +142,8 @@ $(document).ready(function(){
         <td>${data.notes}</td>`;
        
     html += `</tbody></table>`;
-    $('#rundetails').html(html);
+    $('#rundetails').html(html).show();
+    $('#viewruns').hide();
   }
 
   function deleteRun(id){
