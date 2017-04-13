@@ -29,13 +29,13 @@
       <button id="addrun">Add Run</button>
   </div>
   <form id="addruns">
-     <p>Date of Run</p>
+     <label for="dateofrun">Date of Run</label>
     <input type="text" id="dateofrun">
-     <p>Time of Run<p/p>
+     <label for="timeofrun">Time of Run</label>
     <input type="text" id="timeofrun">
-     <p>Distance of Run</p>
+     <label for="distanceofrun">Distance of Run</label>
     <input type="text" id="distanceofrun">
-     <p>Location of Run</p>
+     <label for="locationofrun">Location of Run</label>
     <input type="text" id="locationofrun">
     <label>Weather</label>
              <select id = "weatherrun">
@@ -65,37 +65,37 @@
   </div>
   <form id="editruns">
     <input type="text" id="recordid">
-    <p>Date of Run</p>
-    <input type="text" id="dateofrunx">
-     <p>Time of Run<p/p>
-    <input type="text" id="timeofrunx">
-     <p>Distance of Run</p>
-    <input type="text" id="distanceofrunx">
-     <p>Location of Run</p>
-    <input type="text" id="locationofrunx">
+    <label for="dateofrunx">Date of Run</label>
+    <input type="text" id="dateofrunx"><br><br>
+    <label for="timeofrunx">Time of Run</label>
+    <input type="text" id="timeofrunx"><br><br>
+    <label for="distanceofrunx">Distance of Run</label>
+    <input type="text" id="distanceofrunx"><br><br>
+    <label for="locationofrunx">Location of Run</label>
+    <input type="text" id="locationofrunx"><br><br>
     <label>Weather</label>
-             <select id = "weatherrunx">
-               <option value = "Sunny">Sunny</option>
-               <option value = "Cloudy">Cloudy</option>
-               <option value = "Partly Cloudy">Partly Cloudy</option>
-               <option value = "Rain">Rain</option>
-               <option value = "Snow">Snow</option>
-               <option value = "Ice">Ice</option>
-               <option value = "Windy">Windy</option>
-               <option value = "Hot">Hot</option>
-               <option value = "Cold">Cold</option>
-             </select>
-    <label>Mood</label>
-             <select id = "moodrunx">
-               <option value = "Energetic">Energetic</option>
-               <option value = "Tired">Tired</option>
-               <option value = "Happy">Happy</option>
-               <option value = "Sad">Sad</option>
-              </select>
-          <p>Notes</p>
-          <textarea id="notesrunx" rows="6" cols="60"> 
-          </textarea>
-    <button type="submit">Submit Run</button>
+    <select id = "weatherrunx">
+      <option value = "Sunny">Sunny</option>
+      <option value = "Cloudy">Cloudy</option>
+      <option value = "Partly Cloudy">Partly Cloudy</option>
+      <option value = "Rain">Rain</option>
+      <option value = "Snow">Snow</option>
+      <option value = "Ice">Ice</option>
+      <option value = "Windy">Windy</option>
+      <option value = "Hot">Hot</option>
+      <option value = "Cold">Cold</option>
+    </select>
+    <label>&nbsp;&nbsp;Mood</label>
+    <select id = "moodrunx">
+      <option value = "Energetic">Energetic</option>
+      <option value = "Tired">Tired</option>
+      <option value = "Happy">Happy</option>
+      <option value = "Sad">Sad</option>
+    </select>
+    <p>Notes</p>
+    <textarea id="notesrunx" rows="6" cols="60"> 
+    </textarea>
+    <button type="submit" class="submitruns">Submit Run</button>
   </form>
   <div id="deleterun">
   </div>

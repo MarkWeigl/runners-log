@@ -26,7 +26,7 @@ $(document).ready(function(){
   }
 
   function displayRuns(data){
-    var html = `<table><thead><tr><th>Date</th><th>Time</th><th>Distance</th><th>Actions</th></tr></thead><tbody>`
+    var html = `<table align="center"><thead><tr><th>Date</th><th>Time</th><th>Distance</th><th>Actions</th></tr></thead><tbody>`
     for (var i=0; i < data.length; i++) {
       html += `<tr data-id="${data[i].id}"><td>${data[i].date.slice(0,10)}</td>
         <td>${data[i].time}</td>

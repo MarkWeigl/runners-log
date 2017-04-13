@@ -2,6 +2,7 @@ body {
   background-image: url('../images/runners.png');
   background-repeat: no-repeat;
   background-position: top center;
+  padding-top: 85px;
 }
 
 #splashpage, #addruns, #editruns {
@@ -10,6 +11,8 @@ body {
 
 .submitruns {
   display: block;
+  margin: 0 auto;
+  text-align: center;
 }
 
 #recordid {
