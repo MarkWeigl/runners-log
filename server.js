@@ -88,7 +88,6 @@ app.put('/log/:id', (req, res) => {
     .catch(err => res.status(500).json({message: 'Unable to update'}));
 });
 
-
 let server;
 
 function runServer(databaseUrl=DATABASE_URL, port=PORT) {

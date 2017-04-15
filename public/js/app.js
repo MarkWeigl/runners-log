@@ -1,11 +1,6 @@
 $(document).ready(function(){
   var data;
-//    RunLog:[{"id": "0", "date": "03/20/17", "time": "30 minutes", "distance": "3 miles", "location": "city park", "weather": "sunny", "mood": "grumpy", "notes": "ran with new shoes"},
-//    {"id": "1", "date": "03/21/17", "time": "45 minutes", "distance": "5 miles", "location": "sloans lake", "weather": "rainy", "mood": "happy"},
-//    {"id": "2", "date": "03/22/17", "time": "20 minutes", "distance": "2 miles", "location": "neighborhood", "weather": "snowy", "mood": "cold", "notes": "snowy run.  had to end early"},
-//    {"id": "3", "date": "03/23/17", "time": "45 minutes", "distance": "6 miles", "location": "mountains", "weather": "sunny", "mood": "happy"},
-//    {"id": "4", "date": "03/24/17", "time": "30 minutes", "distance": "3 miles", "location": "rains park", "weather": "cloudy", "mood": "tired", "notes": "tired so stopped running"}]
-//  };
+
   $('#login').hide();
   $('#editruns').hide();
   $('#viewruns').hide();
@@ -35,10 +30,21 @@ $(document).ready(function(){
         <i class="fa fa-times delete"></i>
         <i class="fa fa-info details"></i></td></tr>`;
     }
-    html += `</tbody></table>`;
+    html += `</tbody></table><br>`;
+    html += `<button id="addruns" class="submitruns">Add Run</button>`;
     $('#viewruns').html(html);
   }
   getRuns();
+
+  $('#addruns').mousedown(function() {
+    $('#viewruns').hide();
+    $('#addruns').show();
+  });
+
+    $('#backtolog').mousedown(function() {
+    $('#rundetails').hide();
+    $('#viewruns').show();
+  });
 
   $(document).on("click",".details",function(){
     var id = $(this).parent().parent().attr("data-id");
@@ -141,7 +147,8 @@ $(document).ready(function(){
         <td>${data.mood}</td>
         <td>${data.notes}</td>`;
        
-    html += `</tbody></table>`;
+    html += `</tbody></table><br>`;
+    html += `<button id="backtolog" class="submitruns">Back to Run Log</button>`;
     $('#rundetails').html(html).show();
     $('#viewruns').hide();
   }
