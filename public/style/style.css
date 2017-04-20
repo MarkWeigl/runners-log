@@ -5,7 +5,7 @@ body {
   padding-top: 85px;
 }
 
-#splashpage, #addruns, #editruns {
+#splashpage, #editruns, #addruns, #login, #createaccount{
   text-align: center;
 }
 

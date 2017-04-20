@@ -21,21 +21,29 @@
     <p>Username</p>
     <input type="text" id="username">
     <p>Password</p>
-    <input type="text" id="password">
-    <button type="submit">Login</button>
+    <input type="text" id="password"><br><br>
+    <button type="submit">Login</button><br><br>
+    <button type="submit" id="newaccount">Create New Account</button>
+  </form>
+  <form id="createaccount">
+    <h1>Runner's Log</h1>
+    <p>Username</p>
+    <input type="text" id="newusername">
+    <p>Password</p>
+    <input type="text" id="newpassword"><br><br>
     <button type="submit">Create Account</button>
   </form>
   <div id="viewruns">
   </div>
   <form id="addruns">
     <label for="dateofrun">Date of Run</label>
-    <input type="text" id="dateofrun">
+    <input type="text" id="dateofrun"><br><br>    
     <label for="timeofrun">Time of Run</label>
-    <input type="text" id="timeofrun">
+    <input type="text" id="timeofrun"><br><br>
     <label for="distanceofrun">Distance of Run</label>
-    <input type="text" id="distanceofrun">
+    <input type="text" id="distanceofrun"><br><br>
     <label for="locationofrun">Location of Run</label>
-    <input type="text" id="locationofrun">
+    <input type="text" id="locationofrun"><br><br>
     <label for="weatherrun">Weather</label>
     <select id = "weatherrun">
       <option value = "Sunny">Sunny</option>
@@ -47,7 +55,7 @@
       <option value = "Windy">Windy</option>
       <option value = "Hot">Hot</option>
       <option value = "Cold">Cold</option>
-    </select>
+    </select><br><br>
       <label for="moodrun">Mood</label>
     <select id = "moodrun">
       <option value = "Energetic">Energetic</option>
@@ -57,7 +65,8 @@
     </select>
     <p>Notes</p>
     <textarea id="notesrun" rows="6" cols="60"> 
-    </textarea>
+    </textarea><br><br>
+    <button id="addruns" class="submitruns">Add Run</button>
   </form>
   <div id="rundetails">
   </div>

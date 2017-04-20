@@ -6,12 +6,18 @@ $(document).ready(function(){
   $('#viewruns').hide();
   $('#addruns').hide();
   $('#rundetails').hide();
+  $('#createaccount').hide();
 
   $('#start').mousedown(function() {
       $('#splashpage').hide();
-    //  $('#login').show();
-      $('#viewruns').show();
-    });
+      $('#login').show();
+  });
+
+
+  $('#newaccount').mousedown(function() {
+    $('#login').hide();
+    $('#createaccount').show();
+  });
 
   function getRuns(){
     $.getJSON("/log",function(results){
@@ -31,17 +37,18 @@ $(document).ready(function(){
         <i class="fa fa-info details"></i></td></tr>`;
     }
     html += `</tbody></table><br>`;
-    html += `<button id="addruns" class="submitruns">Add Run</button>`;
+    html += `<button id="addarun" class="submitruns">Add a Run</button>`;
     $('#viewruns').html(html);
   }
   getRuns();
 
-  $('#addruns').mousedown(function() {
+  $(document).on("click","#addarun",function() {
+    console.log("clicked");
     $('#viewruns').hide();
     $('#addruns').show();
   });
 
-    $('#backtolog').mousedown(function() {
+  $(document).on("click","#backtolog",function() {
     $('#rundetails').hide();
     $('#viewruns').show();
   });
@@ -89,7 +96,9 @@ $(document).ready(function(){
     runObj.weather=$("#weatherrun").val();
     runObj.mood=$("#moodrun").val();
     runObj.notes=$("#notesrun").val();
-    
+    $('#addruns').hide();
+    $('#viewruns').show();
+
     $.ajax({
       url: "/log",
       method: "POST",
@@ -169,4 +178,37 @@ $(document).ready(function(){
     getRuns();
   }
 
+  $('#login').submit(function(e){
+    e.preventDefault();
+    var User= {};
+    User.username=$("#username").val();
+    User.password=$("#password").val();
+    console.log(User);
+    $('#login').hide();
+    $('#viewruns').show();
+  
+  $.ajax({
+      url: "/login",
+      method: "POST",
+      data: JSON.stringify(User),
+      contentType: "application/json",
+      dataType: "json",
+      success: function(data) {
+        console.log(data);
+      },
+      error: function(err) {
+        console.log(err);
+      }
+    });
+  });
+
+  $('#createaccount').submit(function(e){
+    e.preventDefault();
+    var newUser= {};
+    newUser.username=$("#newusername").val();
+    newUser.password=$("#newpassword").val();
+    console.log(newUser);
+    $('#createaccount').hide();
+    $('#viewruns').show();
+  }); 
  });
